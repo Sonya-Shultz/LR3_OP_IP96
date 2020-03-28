@@ -7,16 +7,23 @@
 
 using namespace std;
 #include "Deikstra.h"
+#include "FileH.h"
 
 int main()
 {
 	setlocale(LC_ALL, "Rusian");
 	int kilkist = 0; //к-ть "вершн" нашого графа (пустих кл≥тинок в лаб≥ринт≥)
 	int rebra = 0; //к-ть ребе неорграфа
-	int xsize = 0, ysize = 0; //розм≥ри лаб≥ринта х ≥ у в≥дпов≥дно
-	int poch = 0;
-	int kin=0; //номери початкових ≥ к≥нцевих вершин
+	int sizeArr[2]; //масив розм≥р≥в
+
+	int fileSize = sizeSearch(sizeArr);
+
+	int xsize = sizeArr[1];
+	int ysize = sizeArr[0]; //розм≥ри лаб≥ринта х ≥ у в≥дпов≥дно
+	int poch = 0, kin=0; //номери початкових ≥ к≥нцевих вершин
 	int** labir = new int* [xsize]; //Ћаб≥ринт перетворений за пунктом 3 у план≥
+	timeAdd(labir, xsize, ysize);
+	coutFile(sizeArr, labir, fileSize); //вив≥д данних з файлу
 	kilkist = fullGraf(labir, xsize, ysize);
 	int* minvidstan = new int[kilkist]; //масив м≥н≥мальних в≥дстаней
 	int* predok = new int[kilkist]; //ўоб знайти шл€х
@@ -25,7 +32,10 @@ int main()
 	rebra = read_data(data, labir, xsize, ysize);
 	Deikstra(data, poch, xsize, ysize, minvidstan, predok, kilkist, rebra, usani);
 	
-	
-
+	delete[] minvidstan;
+	delete[] predok;
+	delete[] data;
+	delete[] usani;
+	deleteBigArr(labir, xsize);
 }
 
