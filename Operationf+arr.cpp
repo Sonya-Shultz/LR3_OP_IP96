@@ -40,7 +40,7 @@ int sizeSearch(int* sizeArr) {
 	string str;
 	ifstream fin;
 	fin.open(path);
-	if (!fin.is_open()) { cout << "Can't open file "; return 0; }
+	if (!fin.is_open()) { cout << "Can't open file "; }
 	else {
 		int i = 0;
 		int m = 0;
@@ -64,4 +64,20 @@ void deleteBigArr(int** tempArr, int tempSize) {
 	for (int i = 0; i < tempSize; i++) {
 		delete[] tempArr[i];
 	}
+}
+
+int enterSize(int** tempLabir, int rib, int col) {
+	int xfirst=0, yfirst=0;
+	int ver = 0;
+	cout << "for 1 index peak: ";
+	cin >> xfirst;
+	cout << "for 2 index peak: ";
+	cin >> yfirst;
+	if (xfirst > rib) {}
+	if (xfirst >= rib || yfirst >= col || tempLabir[xfirst - 1][yfirst - 1] == -1) {
+		cout << " Choose another one!"<< endl; 
+		enterSize(tempLabir, rib, col);
+	}
+	ver = tempLabir[xfirst - 1][yfirst - 1];
+	return ver;
 }

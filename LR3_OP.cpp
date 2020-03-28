@@ -18,19 +18,25 @@ int main()
 
 	int fileSize = sizeSearch(sizeArr);
 
-	int xsize = sizeArr[1];
-	int ysize = sizeArr[0]; //розм≥ри лаб≥ринта х ≥ у в≥дпов≥дно
+	int xsize = sizeArr[1];//к-сть р€дк≥в в лаб≥ринт≥
+	int ysize = sizeArr[0]; //к-сть стовбц≥в в лаб≥ринт≥
 	int poch = 16, kin=4; //номери початкових ≥ к≥нцевих вершин
-	int** labir = new int* [xsize]; //Ћаб≥ринт перетворений за пунктом 3 у план≥
+	int** labir = new int* [xsize]; //Ћаб≥ринт
 	timeAdd(labir, xsize, ysize);
 	coutFile(sizeArr, labir, fileSize); //вив≥д данних з файлу
 	kilkist = fullGraf(labir, xsize, ysize);
+
+	cout << "Enter for first peak: "<<endl;
+	poch =enterSize(labir, xsize, ysize);
+
+	cout << "Enter for end peak: "<<endl;
+	kin = enterSize(labir, xsize, ysize);
+
 	int* minvidstan = new int[kilkist]; //масив м≥н≥мальних в≥дстаней
 	int* predok = new int[kilkist]; //ўоб знайти шл€х
 	int* data = new int[200]; //щоб записати всi дуги в граф≥
 	bool* usani = new bool[kilkist]; //ўоб знати чи ми вже проходили цю вершину
 	rebra = read_data(data, labir, xsize, ysize);
-	predok = zanul(predok,kilkist);
 	Deikstra(data, poch, xsize, ysize, minvidstan, predok, kilkist, rebra, usani);
 	for (int i = 0; i < kilkist; i++)
 	{

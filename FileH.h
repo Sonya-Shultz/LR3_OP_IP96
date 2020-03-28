@@ -9,3 +9,4 @@ int sizeSearch(int* sizeArr);
 void timeAdd(int** tempArr, int tempSize, int tempSizeTwo);
 void ziroArr(int** tempArr, int tempSize, int tempSizeTwo);
 void deleteBigArr(int** tempArr, int tempSize);
+int enterSize(int** tempLabir, int rib, int col);
