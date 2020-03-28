@@ -17,9 +17,9 @@ int fullGraf(int** labir, int xsize, int ysize)
 int read_data(int* data, int** labnom, int xsize, int ysize)
 {
 	int q = 0;
-	for (int i = 1; i < xsize - 1; i++)
+	for (int i = 1; i < xsize-1; i++)
 	{
-		for (int j = 1; j < ysize - 1; j++)
+		for (int j = 1; j < ysize-1; j++)
 		{
 			if (labnom[i][j] != -1)
 			{
@@ -68,12 +68,13 @@ bool* ansNO(bool* mas, int size)
 
 int minserch(int* minvids, int size, bool* usani)
 {
-	int min = minvids[0];
-	for (int i = 1; i < size; i++)
+	int min = 3000,minnum=1;
+	for (int i = 0; i < size; i++)
 	{
-		if (min > minvids[i] && !usani[i]) { min = i + 1; }
+		if (min > minvids[i] && !usani[i]) { min = minvids[i]; return i+1;
+		}
 	}
-	return min;
+	return minnum;
 }
 
 void Deikstra(int* data, int poch, int xsize, int ysize, int* minvids, int* predok, int kilkist, int rebra, bool* usani)
@@ -84,10 +85,12 @@ void Deikstra(int* data, int poch, int xsize, int ysize, int* minvids, int* pred
 	int ver0 = poch;
 	predok[ver0 - 1] = 0;
 	int* help = new int[kilkist];
+	help = zanul(help,kilkist);
 	int ver2 = 0;
 	for (int i = 0; i < kilkist; i++)
 	{
 		int ver = minserch(minvids, kilkist, usani);
+		cout << ver << endl;
 		predok[ver - 1] = ver0;
 		usani[ver - 1] = true;
 		int j = serchall(data, ver, rebra * 2, help);
@@ -111,7 +114,7 @@ int serchall(int* data, int ver, int size, int* help)
 	int j = 0;
 	for (int i = 0; i < size; i = i + 2)
 	{
-		if (data[i] = ver)
+		if (data[i] == ver)
 		{
 			help[j] = data[i + 1];
 			j++;

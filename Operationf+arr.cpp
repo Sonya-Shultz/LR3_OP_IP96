@@ -40,7 +40,7 @@ int sizeSearch(int* sizeArr) {
 	string str;
 	ifstream fin;
 	fin.open(path);
-	if (!fin.is_open()) { cout << "Can't open file "; }
+	if (!fin.is_open()) { cout << "Can't open file "; return 0; }
 	else {
 		int i = 0;
 		int m = 0;
