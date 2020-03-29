@@ -20,16 +20,16 @@ int main()
 
 	int xsize = sizeArr[1];//к-сть рядків в лабіринті
 	int ysize = sizeArr[0]; //к-сть стовбців в лабіринті
-	int poch = 16, kin=4; //номери початкових і кінцевих вершин
+	int poch = 16, kin = 4; //номери початкових і кінцевих вершин
 	int** labir = new int* [xsize]; //Лабіринт
 	timeAdd(labir, xsize, ysize);
 	coutFile(sizeArr, labir, fileSize); //вивід данних з файлу
 	kilkist = fullGraf(labir, xsize, ysize);
 
-	cout << "Enter for first peak: "<<endl;
-	poch =enterSize(labir, xsize, ysize);
+	cout << "Enter for first peak: " << endl;
+	poch = enterSize(labir, xsize, ysize);
 
-	cout << "Enter for end peak: "<<endl;
+	cout << "Enter for end peak: " << endl;
 	kin = enterSize(labir, xsize, ysize);
 
 	int* minvidstan = new int[kilkist]; //масив мінімальних відстаней
@@ -48,6 +48,11 @@ int main()
 		cout << minvidstan[i] << " ";
 	}
 	cout << endl;
+	int* resultArr = new int[kilkist];
+	findPath(predok, resultArr, poch, kin);
+	int count = countNoZirro(resultArr, kilkist);//к-сть вершин шляху
+	writeInFile(labir, resultArr, count, xsize, ysize);
+	//int z = A( data, poch,  xsize, ysize,  minvidstan, predok, kilkist, rebra, kin,  labir);
 	delete[] minvidstan;
 	delete[] predok;
 	delete[] data;

@@ -67,7 +67,7 @@ void deleteBigArr(int** tempArr, int tempSize) {
 }
 
 int enterSize(int** tempLabir, int rib, int col) {
-	int xfirst=0, yfirst=0;
+	int xfirst = 0, yfirst = 0;
 	int ver = 0;
 	cout << "for 1 index peak: ";
 	cin >> xfirst;
@@ -75,9 +75,61 @@ int enterSize(int** tempLabir, int rib, int col) {
 	cin >> yfirst;
 	if (xfirst > rib) {}
 	if (xfirst >= rib || yfirst >= col || tempLabir[xfirst - 1][yfirst - 1] == -1) {
-		cout << " Choose another one!"<< endl; 
+		cout << " Choose another one!" << endl;
 		enterSize(tempLabir, rib, col);
 	}
 	ver = tempLabir[xfirst - 1][yfirst - 1];
 	return ver;
+}
+
+void findPath(int* predok, int* result, int poch, int kin) {
+	int i = 1;
+	int el = 0;
+	int ellem = kin;
+	result[0] = kin;
+	do {
+		if (el < 0) { cout << "No path!"; break; }
+		else {
+			el = predok[ellem - 1];
+			result[i] = el;
+			ellem = el;
+			i++;
+		}
+	} while (el != poch);
+}
+
+int countNoZirro(int* resultArr, int kilkist) {
+	int count = 0;
+	for (int i = 0; i < kilkist; i++) {
+		if (resultArr[i] != 0) { count++; }
+	}
+	return count;
+}
+
+void  writeInFile(int** labir, int* result, int count, int rib, int col) {
+	ofstream fout;
+	string path = "Result.txt";
+	fout.open(path);
+	if (!fout.is_open()) { cout << "Something wrong with result file! "; }
+	else {
+		for (int i = 0; i < rib; i++) {
+			for (int j = 0; j < col; j++) {
+				if (labir[i][j] == -1) { fout << 'x' << " "; }
+				else {
+					bool ans = true;
+					for (int l = 0; l < count; l++) {
+						if (labir[i][j] == result[l])
+						{
+							fout << '1' << " ";
+							result[l] = 0;
+							ans = false;
+						}
+					}
+					if (ans) { fout << ' ' << " "; }
+				}
+
+			}
+			fout << endl;
+		}
+	}
 }
