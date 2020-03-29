@@ -90,7 +90,6 @@ void Deikstra(int* data, int poch, int xsize, int ysize, int* minvids, int* pred
 	for (int i = 0; i < kilkist; i++)
 	{
 		int ver = minserch(minvids, kilkist, usani);
-		cout << ver << endl;
 		predok[ver - 1] = ver0;
 		usani[ver - 1] = true;
 		int j = serchall(data, ver, rebra * 2, help);
@@ -130,21 +129,25 @@ int A(int* data, int poch, int xsize, int ysize, int* minvids, int* predok, int 
 	usana.push_back(poch);
 	int* evrist = new int[kilkist];
 	int* help = new int[kilkist];
+	minvids = fulbignum(minvids, kilkist);
 	minvids[poch - 1] = 0;
+	predok[poch - 1] = poch;
 	evrist = fulbignum(evrist, kilkist);
 	evrist[poch - 1] = minvids[poch - 1] + h(poch, labir, xsize, ysize, kin);
 	while (!usana.empty())
 	{
-		int ver = verserch(usana, minvids);
-		if (ver = kin) { return 1; }
+		int ver = verserch(usana, evrist);
+		if (ver == kin) { return 1; }
 		usana = remove(usana, ver);
 		look.push_back(ver);
+		help = zanul(help, kilkist);
 		int j = serchall(data, ver, rebra * 2, help);
 		for (int i = 0; i < j; i++)
 		{
-			int v = help[j];
-			int maylong = minvids[ver] + 1;
-			if (maylong < minvids[v] or !nal(look, v))
+			int v = 0;
+			v = help[i];
+			int maylong = minvids[ver-1] + 1;
+			if (maylong < minvids[v-1] or !nal(look, v))
 			{
 				predok[v - 1] = ver;
 				minvids[v - 1] = maylong;
@@ -158,28 +161,35 @@ int A(int* data, int poch, int xsize, int ysize, int* minvids, int* predok, int 
 
 bool nal(vector<int> look, int a)
 {
-	for (vector<int>::iterator it = look.begin(); it != look.end(); it++)
-	{
-		if (*it = a) { return true; }
+	if (!look.empty()) {
+		for (vector<int>::iterator it = look.begin(); it != look.end(); it++)
+		{
+			if (*it == a) { return true; }
+		}
+		return false;
 	}
 	return false;
 }
 
 vector <int> remove(vector<int> usana, int a)
 {
-	for (vector<int>::iterator it = usana.begin(); it != usana.end(); it++)
-	{
-		if (*it = a) { usana.erase(it); }
+	if (!usana.empty()) {
+		for (vector<int>::iterator it = usana.begin(); it != usana.end(); it++)
+		{
+			if (*it == a) { usana.erase(it); return usana;}
+		}
 	}
 	return usana;
 }
 
 int verserch(vector <int> usana, int* minvids)
 {
-	int min = 300, ver;
-	for (vector<int>::iterator it = usana.begin(); it != usana.end(); it++)
-	{
-		if (min > minvids[*it - 1]) { min = minvids[*it - 1]; ver = *it; }
+	int min = 3000, ver=0;
+	if (!usana.empty()) {
+		for (vector<int>::iterator it = usana.begin(); it != usana.end(); it++)
+		{
+			if (min > minvids[*it - 1]) { min = minvids[*it - 1]; ver = *it; }
+		}
 	}
 	return ver;
 }
