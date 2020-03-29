@@ -67,7 +67,7 @@ void deleteBigArr(int** tempArr, int tempSize) {
 }
 
 int enterSize(int** tempLabir, int rib, int col) {
-	int xfirst = 0, yfirst = 0;
+	int xfirst=0, yfirst=0;
 	int ver = 0;
 	cout << "for 1 index peak: ";
 	cin >> xfirst;
@@ -75,7 +75,7 @@ int enterSize(int** tempLabir, int rib, int col) {
 	cin >> yfirst;
 	if (xfirst > rib) {}
 	if (xfirst >= rib || yfirst >= col || tempLabir[xfirst - 1][yfirst - 1] == -1) {
-		cout << " Choose another one!" << endl;
+		cout << " Choose another one!"<< endl; 
 		enterSize(tempLabir, rib, col);
 	}
 	ver = tempLabir[xfirst - 1][yfirst - 1];

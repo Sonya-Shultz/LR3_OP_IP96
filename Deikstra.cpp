@@ -90,15 +90,14 @@ void Deikstra(int* data, int poch, int xsize, int ysize, int* minvids, int* pred
 	for (int i = 0; i < kilkist; i++)
 	{
 		int ver = minserch(minvids, kilkist, usani);
-		predok[ver - 1] = ver0;
 		usani[ver - 1] = true;
 		int j = serchall(data, ver, rebra * 2, help);
 		for (int i = 0; i < j; i++)
 		{
 			ver2 = help[i];
+			if (minvids[ver2 - 1] > minvids[ver - 1] + 1) { predok[ver2 - 1] = ver; };
 			minvids[ver2 - 1] = min(minvids[ver2 - 1], minvids[ver - 1] + 1);
 		}
-		ver0 = ver;
 	}
 }
 
