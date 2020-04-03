@@ -34,7 +34,7 @@ int main()
 
 	int* minvidstan = new int[kilkist]; //масив мінімальних відстаней
 	int* predok = new int[kilkist]; //Щоб знайти шлях
-	int* data = new int[200]; //щоб записати всi дуги в графі
+	int* data = new int[500]; //щоб записати всi дуги в графі
 	bool* usani = new bool[kilkist]; //Щоб знати чи ми вже проходили цю вершину
 	rebra = read_data(data, labir, xsize, ysize);
 	int ans;

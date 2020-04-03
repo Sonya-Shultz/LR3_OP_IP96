@@ -35,6 +35,18 @@ int read_data(int* data, int** labnom, int xsize, int ysize)
 				if (labnom[i][j + 1] != -1) {
 					data[q] = labnom[i][j]; data[q + 1] = labnom[i][j + 1]; q = q + 2;
 				}
+				if (labnom[i - 1][j - 1] != -1) {
+					data[q] = labnom[i][j]; data[q + 1] = labnom[i - 1][j-1]; q = q + 2;
+				}
+				if (labnom[i - 1][j + 1] != -1) {
+					data[q] = labnom[i][j]; data[q + 1] = labnom[i - 1][j+1]; q = q + 2;
+				}
+				if (labnom[i + 1][j - 1] != -1) {
+					data[q] = labnom[i][j]; data[q + 1] = labnom[i +1][j-1]; q = q + 2;
+				}
+				if (labnom[i + 1][j + 1] != -1) {
+					data[q] = labnom[i][j]; data[q + 1] = labnom[i + 1][j+1]; q = q + 2;
+				}
 			}
 		}
 	}
@@ -195,7 +207,7 @@ int verserch(vector <int> usana, int* minvids)
 
 int h(int poch, int** labir, int xsize, int ysize, int kin)
 {
-	int x1=0, x2=0, y1=0, y2=0;
+	int x1=0, x2=0, y1=0, y2=0, evr;
 	for (int i = 0; i < xsize; i++)
 	{
 		for (int j = 0; j < ysize; j++)
@@ -204,7 +216,8 @@ int h(int poch, int** labir, int xsize, int ysize, int kin)
 			if (labir[i][j] == kin) { x2 = i, y2 = j; }
 		}
 	}
-	int evr = abs(x1 - x2) + abs(y1 - y2);
+	double evr1 = sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+	evr = evr1;
 	return evr;
 }
 
