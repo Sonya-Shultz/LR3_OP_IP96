@@ -14,26 +14,26 @@ int fullGraf(int** labir, int xsize, int ysize)
 	return kilkist;
 }
 
-int read_data(int* data, int** labnom, int xsize, int ysize)
-{
+int read_data(int* data, int** labnom, int xsize, int ysize){
 	int q = 0;
-	for (int i = 1; i < xsize-1; i++)
-	{
-		for (int j = 1; j < ysize-1; j++)
-		{
-			if (labnom[i][j] != -1)
-			{
-				if (labnom[i - 1][j] != -1) {
-					data[q] = labnom[i][j]; data[q + 1] = labnom[i - 1][j]; q = q + 2;
+	for (int i = 1; i < xsize-1; i++){
+		for (int j = 1; j < ysize-1; j++){
+			if (labnom[i][j] != -1){	
+				if (j + 2 < ysize - 1) {
+					if (labnom[i + 1][j + 2] != -1) { data[q] = labnom[i][j]; data[q + 1] = labnom[i + 1][j + 2]; q = q + 2; }
+					if (labnom[i - 1][j + 2] != -1) { data[q] = labnom[i][j]; data[q + 1] = labnom[i - 1][j + 2]; q = q + 2; }
 				}
-				if (labnom[i][j - 1] != -1) {
-					data[q] = labnom[i][j]; data[q + 1] = labnom[i][j - 1]; q = q + 2;
+				if (j - 2 > 0) {
+					if (labnom[i + 1][j - 2] != -1) { data[q] = labnom[i][j]; data[q + 1] = labnom[i + 1][j - 2]; q = q + 2; }
+					if (labnom[i - 1][j - 2] != -1) { data[q] = labnom[i][j]; data[q + 1] = labnom[i - 1][j - 2]; q = q + 2; }
 				}
-				if (labnom[i + 1][j] != -1) {
-					data[q] = labnom[i][j]; data[q + 1] = labnom[i + 1][j]; q = q + 2;
+				if (i + 2 < xsize - 1) {
+					if (labnom[i + 2][j + 1] != -1) { data[q] = labnom[i][j]; data[q + 1] = labnom[i + 2][j + 1]; q = q + 2; }
+					if (labnom[i + 2][j - 1] != -1) { data[q] = labnom[i][j]; data[q + 1] = labnom[i + 2][j - 1]; q = q + 2; }
 				}
-				if (labnom[i][j + 1] != -1) {
-					data[q] = labnom[i][j]; data[q + 1] = labnom[i][j + 1]; q = q + 2;
+				if (i - 2 > 0) {
+					if (labnom[i - 2][j - 1] != -1) { data[q] = labnom[i][j]; data[q + 1] = labnom[i - 2][j - 1]; q = q + 2; }
+					if (labnom[i - 2][j + 1] != -1) { data[q] = labnom[i][j]; data[q + 1] = labnom[i - 2][j + 1]; q = q + 2; }
 				}
 			}
 		}
